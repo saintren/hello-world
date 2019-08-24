@@ -1,0 +1,17 @@
+.layui-input:hover, .layui-textarea:hover {
+	border-color: #D2D2D2 !important
+}
+
+.layui-input:focus, .layui-textarea:focus {
+	border-color: #22d7bb !important
+}
+
+.layui-input-inline-ex {
+	float: left;
+	margin-right: 10px;
+}
+
+.layui-badge-dot-big {
+	width: 12px;
+	height: 12px;
+}
