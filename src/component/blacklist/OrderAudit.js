@@ -1,10 +1,10 @@
 import React from 'react';
 
-import FrameworkContainer from '../container/FrameworkContainer';
+import FrameworkContainer from '../layout/FrameworkContainer';
 import OrderFrom from '../part/OrderForm.js';
-
-import './css/extend.css';
 import BaseOrderPart from '../part/BaseOrderPart';
+import Collapse from '../layout/Collapse';
+import CollapseItem from '../layout/CollapseItem';
 
 class OrderAudit extends React.Component {
 
@@ -18,6 +18,9 @@ class OrderAudit extends React.Component {
             <FrameworkContainer>
                 <OrderFrom title="Order Audit" btnName="Order+" />
                 <BaseOrderPart title="Base Info" />
+                <Collapse>
+                    <CollapseItem title="test" content={<BaseOrderPart title="Base Info" />}></CollapseItem>
+                </Collapse>
             </FrameworkContainer>
         );
 

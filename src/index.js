@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './resources/layui/css/layui.css'
+import './resources/layui/css/layui.css';
 import OrderAudit from './component/blacklist/OrderAudit.js';
 import * as serviceWorker from './serviceWorker';
 
