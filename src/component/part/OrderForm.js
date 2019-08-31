@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+import Select from '../form/Select';
 /**
  * 容器
  * */
@@ -32,6 +34,9 @@ class OrderForm extends React.Component {
                         </div>
                     </div>
                 </fieldset>
+                <Select>
+                    <option value="xx">测试</option>
+                </Select>
             </form >
         );
     }
