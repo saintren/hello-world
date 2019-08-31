@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Panel from '../layout/Panel';
 /**
  * 订单基础部分
  * 
@@ -12,19 +13,15 @@ class BaseOrderPart extends React.Component {
 
     render() {
         return (
-            <div className="layui-card">
-                <div className="layui-card-header layui-bg-cyan">{this.props.title}</div>
-                <div className="layui-card-body">
-                    <table className="layui-table">
-
-                        <tbody>
-                            <Row columns={[{title:'Loan App Id', text:'100390'}, {title:'Score', text:Math.random()},{title:'Mobile',text:'12323'}]} />
-                            <Row columns={[{title:'Name', text:'Saint Ren'}, {title:'Apply Time', text:new Date().toLocaleTimeString()},{title:'',text:''}]} />
-                            <Row columns={[{title:'App Name', text:'自有业务平台'}, {title:'Loan Amount', text:'3000'},{title:'Term',text:'12 Days'}]} />
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <Panel title={this.props.title} >
+                <table className="layui-table">
+                    <tbody>
+                        <Row columns={[{ title: 'Loan App Id', text: '100390' }, { title: 'Score', text: Math.random() }, { title: 'Mobile', text: '12323' }]} />
+                        <Row columns={[{ title: 'Name', text: 'Saint Ren' }, { title: 'Apply Time', text: new Date().toLocaleTimeString() }, { title: '', text: '' }]} />
+                        <Row columns={[{ title: 'App Name', text: '自有业务平台' }, { title: 'Loan Amount', text: '3000' }, { title: 'Term', text: '12 Days' }]} />
+                    </tbody>
+                </table>
+            </Panel>
         );
     }
 }
@@ -36,25 +33,25 @@ class Row extends React.Component {
         super(props);
     }
 
-    renderColumns(){
-        const temp = this.props.columns.map((item)=>{
+    renderColumns() {
+        const temp = this.props.columns.map((item) => {
             return this.renderItem(item);
         })
 
         return temp;
     }
 
-    renderItem(item){
+    renderItem(item) {
 
         return (
-            <Column title={item.title} key={item.title} text={item.text}/>
+            <Column title={item.title} key={item.title} text={item.text} />
         );
     }
 
     render() {
         return (
             <tr>
-               {this.renderColumns()}
+                {this.renderColumns()}
             </tr>
         );
     }
