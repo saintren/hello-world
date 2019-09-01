@@ -1,112 +1,131 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 /**表单的下拉框组件 */
-export default class Select extends React.Component {
+export default class Select extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: null,
-            selectStatus: false
+            tipValue: null,
+            value: "",
+            selectStatus: false,
+            currentItem: null
         };
-
-        this.items = [];
     }
 
     /**切换选择状态*/
     toggleSelect(event) {
         this.setState((state) => ({
-            selectStatus:!state.selectStatus
+            selectStatus: !state.selectStatus
         })
         );
     }
 
-    selectItem(event){
-        console.log(event.target);
-        this.items.forEach(item=>{
-            if (item==event.target){
-                item.setSelected(true);
-            }
+    initItems() {
+        const array = new Array();
+
+        array.push(<SelectItem key="default" value="" text={this.props.tip} selected="true" notify={(item) => this.selectItem(item)} />);
+
+        React.Children.forEach(this.props.children, (option, index) => {
+            array.push(<SelectItem value={option.props.value} key={index} text={option.props.children} notify={(item) => this.selectItem(item)} />);
         });
+
+        return array;
     }
 
+    /**子组件触发 */
+    selectItem(item) {
 
-    renderExtra() {
+        if (this.state.currentItem == null) {
+            this.setState({
+                currentItem: item
+            });
+            return;
+        }
 
-        this.items = React.Children.map(this.props.children, (option, index) => {
-            return (<SelectItem value={option.props.value} key={index} text={option.props.children}/>);
+        this.state.currentItem.setSelected(false);
+        this.setState({
+            currentItem: item,
+            value: item.getValue(),
+            tipValue: item.getValue() == "" ? "" : item.getText()//显示值为选项的文本值
         });
-
-        return (
-
-            <div className={'layui-unselect ' + 'layui-form-select ' + (this.state.selectStatus ? 'layui-form-selected' : '')} onClick={(event) => this.toggleSelect(event)}>
-                <Tip tip="ceshi"/>
-                <dl className="layui-anim layui-anim-upbit" onClick={(event)=>{this.selectItem(event)}}>
-                    <SelectItem value="" text="请选择"/>
-                    {this.items}
-                </dl>
-            </div>
-        );
-
     }
 
     render() {
 
         return (
             <React.Fragment>
-                <select>
+                <select defaultValue={this.state.value}>
                     {this.props.children}
                 </select>
-                {this.renderExtra()}
-
+                <div className={'layui-unselect ' + 'layui-form-select ' + (this.state.selectStatus ? 'layui-form-selected' : '')} onClick={(event) => this.toggleSelect(event)}>
+                    <Tip tip={this.props.tip} value={this.state.tipValue} />
+                    <dl className="layui-anim layui-anim-upbit">
+                        {this.initItems()}
+                    </dl>
+                </div>
             </React.Fragment>
         );
     }
 }
+Select.defaultProps = {
+    tip: "请选择"
+}
 /**显示在选择框上的提示 */
-class Tip extends React.Component {
+class Tip extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            value:this.props.value
-        }
-    }
-
-    doUpdateValue(val){
-        this.setState({
-            value:val
-        });
     }
 
     render() {
         return (
             <div className="layui-select-title">
-                <input type="text" placeholder={this.props.tip} value={this.state.value} readOnly className="layui-input layui-unselect" /><i className="layui-edge"></i>
+                <input type="text" placeholder={this.props.tip} defaultValue={this.props.value} readOnly className="layui-input layui-unselect" /><i className="layui-edge"></i>
             </div>
         );
     }
 }
 
 /**选项*/
-class SelectItem extends React.Component{
+class SelectItem extends React.Component {
 
-    constructor (props){
+    constructor(props) {
         super(props);
         this.state = {
-            value:"",
-            selected:false
+            selected: false
         };
     }
 
-    setSelected(flag){
-        this.setState({
-            selected:flag
-        });  
+    getValue() {
+        return this.props.value;
     }
 
-    render(){
+    getText() {
+        return this.props.text;
+    }
+
+    setSelected(flag) {
+        this.setState({
+            selected: flag
+        });
+    }
+
+    /**初始化 */
+    componentDidMount() {
+        if (this.props.selected) {
+            this.handleClick();
+        }
+    }
+
+    /**处理点击事件 */
+    handleClick() {
+        this.setSelected(true);//选中
+        this.props.notify(this);//通知父组件
+    }
+
+    render() {
         return (
-            <dd className={"layui-select-tips " + (this.state.selected?'layui-this':'')}>{this.props.text}</dd>
+            <dd className={"layui-select-tips " + (this.state.selected ? 'layui-this' : '')} onClick={() => this.handleClick()}>{this.props.text}</dd>
         )
     }
 }

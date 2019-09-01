@@ -12,13 +12,14 @@ class OrderForm extends React.Component {
         this.state = {
 
         };
+        this.select = React.createRef();
     }
 
     /**提交*/
     onSubmit(event){
         //阻止事件传播
         event.preventDefault();
-        console.log("submit");
+        console.log("submit "+this.select.current.state.value);
     }
 
 
@@ -34,8 +35,9 @@ class OrderForm extends React.Component {
                         </div>
                     </div>
                 </fieldset>
-                <Select>
-                    <option value="xx">测试</option>
+                <Select ref={this.select}>
+                    <option value="1">选项1</option>
+                    <option value="2">选项2</option>
                 </Select>
             </form >
         );

@@ -12,10 +12,6 @@ class Collapse extends React.Component {
         
     }
 
-    hidden(){
-        
-    }
-
     render() {
         return (
             <div className="layui-collapse">
