@@ -38,6 +38,7 @@ class OrderForm extends React.Component {
                 <Select ref={this.select}>
                     <option value="1">选项1</option>
                     <option value="2">选项2</option>
+                    <option value="3">选项3</option>
                 </Select>
             </form >
         );
