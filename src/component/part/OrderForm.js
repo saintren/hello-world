@@ -2,6 +2,7 @@ import React from 'react';
 
 
 import Select from '../form/Select';
+import RadioGroup from '../form/RadioGroup';
 /**
  * 容器
  * */
@@ -40,7 +41,9 @@ class OrderForm extends React.Component {
                     <option value="2">选项2</option>
                     <option value="3">选项3</option>
                 </Select>
-            </form >
+                <RadioGroup name="text" datas={[{text:"测试1",value:"1"},{text:"测试2",value:"2"},{text:"测试3",value:"3"}]}>
+                </RadioGroup>
+            </form>
         );
     }
 }
