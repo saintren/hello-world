@@ -5,10 +5,6 @@ import React from 'react';
  * */
 class FrameworkContainer extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <div className="layui-container">

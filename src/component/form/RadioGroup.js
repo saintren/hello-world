@@ -25,7 +25,7 @@ class RadioGroup extends React.Component {
         }
 
         //如果点击的是同一个，则不做处理
-        if (this.state.checkedItem == item) {
+        if (this.state.checkedItem === item) {
             return;
         }
 

@@ -7,10 +7,6 @@ import Panel from '../layout/Panel';
 */
 class BaseOrderPart extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Panel title={this.props.title} >
@@ -28,10 +24,6 @@ class BaseOrderPart extends React.Component {
 
 /**行*/
 class Row extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     renderColumns() {
         const temp = this.props.columns.map((item) => {
@@ -58,10 +50,6 @@ class Row extends React.Component {
 }
 /**列*/
 class Column extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

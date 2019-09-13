@@ -3,10 +3,6 @@ import React from 'react';
 /**面板 */
 class Panel extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return (
             <div className="layui-card">

@@ -22,7 +22,7 @@ export default class Select extends Component {
     }
 
     initItems() {
-        const array = new Array();
+        const array = [];
 
         array.push(<SelectItem key="default" value="" text={this.props.tip} selected="true" notify={(item) => this.selectItem(item)} />);
 
@@ -47,7 +47,7 @@ export default class Select extends Component {
         this.setState({
             currentItem: item,
             value: item.getValue(),
-            tipValue: item.getValue() == "" ? "" : item.getText()//显示值为选项的文本值
+            tipValue: item.getValue() === "" ? "" : item.getText()//显示值为选项的文本值
         });
     }
 
@@ -58,7 +58,7 @@ export default class Select extends Component {
                 <select defaultValue={this.state.value}>
                     {this.props.children}
                 </select>
-                <div className={'layui-unselect ' + 'layui-form-select ' + (this.state.selectStatus ? 'layui-form-selected' : '')} onClick={(event) => this.toggleSelect(event)}>
+                <div className={'layui-unselect layui-form-select ' + (this.state.selectStatus ? 'layui-form-selected' : '')} onClick={(event) => this.toggleSelect(event)}>
                     <Tip tip={this.props.tip} value={this.state.tipValue} />
                     <dl className="layui-anim layui-anim-upbit">
                         {this.initItems()}
@@ -73,9 +73,6 @@ Select.defaultProps = {
 }
 /**显示在选择框上的提示 */
 class Tip extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

@@ -3,6 +3,9 @@ import React from 'react';
 
 import Select from '../form/Select';
 import RadioGroup from '../form/RadioGroup';
+import Switch from '../form/Switch';
+import CheckBox from '../form/CheckBox';
+
 /**
  * 容器
  * */
@@ -43,6 +46,12 @@ class OrderForm extends React.Component {
                 </Select>
                 <RadioGroup name="text" datas={[{text:"测试1",value:"1"},{text:"测试2",value:"2"},{text:"测试3",value:"3"}]}>
                 </RadioGroup>
+                <Switch name="aa" value="1" on="开" off="关"></Switch>
+                <div>
+                    <CheckBox name="cb" text="checkBox" />
+                    <CheckBox name="cb" text="读书" />
+                    <CheckBox name="cb" text="看报" />
+                </div>
             </form>
         );
     }
